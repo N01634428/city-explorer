@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  h2 Results for "#{city}"
+
+  h3 Top Restaurants
+  if restaurants.length
+    .restaurant-list
+      each r in restaurants
+        .restaurant
+          if r.image_url
+            img(src=r.image_url, width="150", alt=r.name)
+          h4 #{r.name} (#{r.rating} ★)
+          p #{r.location.address1}, #{r.location.city}
+          a(href=r.url, target="_blank") View on Yelp
+  else
+    p No restaurants found.
+
+  h3 YouTube Videos
+  if videos.length
+    .video-list
+      each v in videos
+        .video
+          iframe(
+            width="300",
+            height="170",
+            src=`https://www.youtube.com/embed/${v.id.videoId}`,
+            frameborder="0",
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+            allowfullscreen
+          )
+          p #{v.snippet.title}
+  else
+    p No videos found.
+
+  br
+  a(href="/") ← Search again

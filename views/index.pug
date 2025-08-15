@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1 City Explorer
+  form(action="/search", method="POST")
+    label(for="city") Enter a city name:
+    input(type="text", name="city", id="city", required)
+    button(type="submit") Search
