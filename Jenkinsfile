@@ -15,9 +15,18 @@ pipeline {
                  ls -la
                  node --version
                  npm --version
-                 node run build
+                 npm ci
+                 npm run build
                  ls -la
                '''
+            }
+        }
+        stage('Test'){
+            steps{
+                sh '''
+                  test -f build/index.pug
+                  npm test
+                '''
             }
         }
         
